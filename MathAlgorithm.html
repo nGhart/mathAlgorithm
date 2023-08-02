@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Goldman&family=Ribeye&family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: rgb(237, 237, 87);
+        color: white;
+        font-family: 'Ribeye', cursive;
+      }
+      .mainContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 70px auto;
+      }
+      .title {
+        text-align: center;
+        font-family: 'Ribeye', cursive;
+        color: blue;
+        font-weight: 700;
+      }
+      input {
+        margin: 10px;
+      }
+      .fibContainer,
+      .factContainer,
+      .primeContainer,
+      .power2Container {
+        width: 500px;
+        text-align: center;
+        margin-top: 20px;
+        background-color: blue;
+        border-top-right-radius: 10px;
+      }
+      @media screen and (max-width: 415px) {
+        .fibContainer,
+        .factContainer,
+        .primeContainer,
+        .power2Container {
+          width: 95vw;
+        }
+      }
+      .fibHeader,
+      .factHeader,
+      .primeHeader,
+      .power2Header {
+        background-color: red;
+      }
+      h2 {
+        border-top-right-radius: 10px;
+        font-family: 'Goldman', cursive;
+      }
+      input {
+        font-family: 'Goldman', cursive;
+        font-size: 20px;
+        height: 30px;
+        padding: 5px;
+      }
+      button {
+        padding: 10px;
+        font-weight: 700;
+        background-color: rgb(126, 126, 219);
+        border-color: white;
+      }
+      .answer {
+        font-family: 'Goldman', cursive;
+        padding-bottom: 10px;
+      }
+      #fibResult,
+      #factResult,
+      #primeResult,
+      #power2Result {
+        font-family: 'Silkscreen', cursive;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mainContainer">
+      <h1 class="title">Math Algorithms</h1>
+      <div class="fibContainer">
+        <h2 class="fibHeader">FIBONACCI SEQUENCE</h2>
+        <p class="description">
+          A set of numbers, starting with 0 and 1, and each number that follows
+          being the sum of the two preceding numbers.
+        </p>
+        <form>
+          <input type="text" id="fibInput" />
+        </form>
+        <button onclick="getFibSequence()">Get Result</button>
+        <h3 class="answer">
+          Answer:
+          <span id="fibResult"></span>
+        </h3>
+      </div>
+      <div class="factContainer">
+        <h2 class="factHeader">FACTORIALS</h2>
+        <p class="description">
+          The product of all the positive numbers less than and equal to a given
+          number
+        </p>
+        <form>
+          <input type="text" id="factInput" />
+        </form>
+        <button onclick="getFactorial()">Get Result</button>
+        <h3 class="answer">
+          Answer:
+          <span id="factResult"></span>
+        </h3>
+      </div>
+      <div class="primeContainer">
+        <h2 class="primeHeader">PRIME NUMBERS</h2>
+        <p class="description">A number with two factors, the number and 1</p>
+        <form>
+          <input type="text" id="primeInput" />
+        </form>
+        <button onclick="getPrime()">Get Result</button>
+        <h3 class="answer">
+          Answer:
+          <span id="primeResult"></span>
+        </h3>
+      </div>
+      <div class="power2Container">
+        <h2 class="power2Header">POWER OF TWO</h2>
+        <p class="description">Find if a number is a power of two</p>
+        <form>
+          <input type="text" id="power2Input" />
+        </form>
+        <button onclick="getPower2()">Get Result</button>
+        <h3 class="answer">
+          Answer:
+          <span id="power2Result"></span>
+        </h3>
+      </div>
+    </div>
+    <script>
+      function getFibSequence() {
+        let n = parseInt(document.getElementById('fibInput').value);
+        let fib = [0, 1];
+        for (let i = 2; i < n; i++) {
+          fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        document.getElementById('fibResult').innerHTML = fib.join(', ');
+      }
+
+      function getFactorial() {
+        let n = parseInt(document.getElementById('factInput').value);
+        let factorial = 1;
+        for (let i = 2; i <= n; i++) {
+          factorial *= i;
+        }
+        document.getElementById('factResult').innerHTML = factorial;
+      }
+      function getPrime() {
+        let n = parseInt(document.getElementById('primeInput').value);
+        let primeResult = document.getElementById('primeResult');
+        primeResult.innerHTML = '';
+        if (n < 2) {
+          return (primeResult.innerHTML = 'Enter a number greater than one');
+        }
+        for (let i = 2; i < n; i++) {
+          if (n % i === 0) {
+            return (primeResult.innerHTML = `${n} is not a prime`);
+          }
+        }
+        primeResult.innerHTML = `${n} is a prime`;
+      }
+
+      function getPower2() {
+        let n = parseInt(document.getElementById('power2Input').value);
+        if (n < 1) {
+          return (document.getElementById('power2Result').innerHTML = 'false');
+        }
+        while (n > 1) {
+          if (n % 2 !== 0) {
+            return (document.getElementById('power2Result').innerHTML =
+              'false');
+          }
+          n = n / 2;
+        }
+        document.getElementById('power2Result').innerHTML = 'true';
+      }
+    </script>
+  </body>
+</html>
